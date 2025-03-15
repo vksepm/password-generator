@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="lp-pg-generated-password">
+            <div class="password-display">
+                <input value="" id="GENERATED-PASSWORD" spellcheck="false" class="lp-pg-generated-password__input" type="text" readonly />
+                <div class="lp-pg-generated-password__icon-wrapper">
+                    <button class="lp-pg-generated-password__icon" id="copyButton" title="Copy password">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <button class="lp-pg-generated-password__icon" id="generateButton" title="Generate new password">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 4v6h-6"></path>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="lp-pg-generated-password__strength-wrapper">
+                <div class="lp-pg-generated-password__strength"></div>
+            </div>
+        </div>
+
+        <form id="PG-FORM" class="lp-pg-settings">
+            <div class="settings-group">
+                <label class="settings-label">
+                    Password Length: <span class="length-display">12</span>
+                </label>
+                <div class="range-wrapper">
+                    <input type="range" 
+                           id="lp-pg-password-length" 
+                           class="modern-range" 
+                           min="1" 
+                           max="36" 
+                           value="12"
+                           step="1">
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <h3 class="settings-title">Character Sets</h3>
+                <div class="radio-group">
+                    <div class="radio-option" data-tooltip="Creates passwords using only letters, avoiding ambiguous characters. Best for memorable passwords.">
+                        <input class="radio-input" id="lp-pg-easy-to-say" name="encryption-style" type="radio" value="easy-to-say" />
+                        <label class="radio-label" for="lp-pg-easy-to-say">
+                            Easy to say
+                        </label>
+                    </div>
+                    <div class="radio-option" data-tooltip="Uses letters and numbers, avoiding similar-looking characters like 'l', '1', 'O', '0'. Good balance of security and readability.">
+                        <input class="radio-input" id="lp-pg-easy-to-read" name="encryption-style" type="radio" value="easy-to-read" checked />
+                        <label class="radio-label" for="lp-pg-easy-to-read">
+                            Easy to read
+                        </label>
+                    </div>
+                    <div class="radio-option" data-tooltip="Uses all possible characters for maximum security. Best for password managers.">
+                        <input class="radio-input" id="lp-pg-all-characters" name="encryption-style" type="radio" value="all-characters" />
+                        <label class="radio-label" for="lp-pg-all-characters">
+                            All characters
+                        </label>
+                    </div>
+                    <div class="radio-option" data-tooltip="Generates a standard UUID/GUID (e.g., 550e8400-e29b-41d4-a716-446655440000)">
+                        <input class="radio-input" id="lp-pg-guid" name="encryption-style" type="radio" value="guid" />
+                        <label class="radio-label" for="lp-pg-guid">
+                            GUID
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group" id="character-options">
+                <div class="checkbox-grid">
+                    <label class="checkbox-wrapper" data-tooltip="Include uppercase letters (A-Z)">
+                        <input class="checkbox-input" checked id="lp-pg-uppercase" type="checkbox" name="uppercase" />
+                        <span class="checkbox-label">Uppercase</span>
+                    </label>
+                    <label class="checkbox-wrapper" data-tooltip="Include lowercase letters (a-z)">
+                        <input class="checkbox-input" checked id="lp-pg-lowercase" type="checkbox" name="lowercase" />
+                        <span class="checkbox-label">Lowercase</span>
+                    </label>
+                    <label class="checkbox-wrapper" data-tooltip="Include numbers (0-9)">
+                        <input class="checkbox-input" checked id="lp-pg-numbers" type="checkbox" name="numbers" />
+                        <span class="checkbox-label">Numbers</span>
+                    </label>
+                    <label class="checkbox-wrapper" data-tooltip="Include special characters (!@#$%^&* etc)">
+                        <input class="checkbox-input" checked id="lp-pg-symbols" type="checkbox" name="symbols" />
+                        <span class="checkbox-label">Symbols</span>
+                    </label>
+                </div>
+            </div>
+        </form>
+
+        <button class="copy-button">Copy Password</button>
+    </div>
+
+    <div class="notification" id="copy-notification">
+        <div class="notification-content">
+            <svg class="check-icon" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <span>Password copied!</span>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
