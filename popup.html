@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Password Generator</title>
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate secure passwords with customizable options">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="lp-pg-generated-password">
+    <main class="container">
+        <h1 class="visually-hidden">Password Generator</h1>
+        
+        <div class="lp-pg-generated-password" role="region" aria-label="Generated Password">
             <div class="password-display">
-                <input value="" id="GENERATED-PASSWORD" spellcheck="false" class="lp-pg-generated-password__input" type="text" readonly />
+                <input value="" 
+                       id="GENERATED-PASSWORD" 
+                       spellcheck="false" 
+                       class="lp-pg-generated-password__input" 
+                       type="text" 
+                       readonly 
+                       aria-label="Generated password"
+                       role="textbox" />
                 <div class="lp-pg-generated-password__icon-wrapper">
-                    <button class="lp-pg-generated-password__icon" id="copyButton" title="Copy password">
+                    <button class="lp-pg-generated-password__icon" 
+                            id="copyButton" 
+                            title="Copy password"
+                            aria-label="Copy password to clipboard">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
                     </button>
-                    <button class="lp-pg-generated-password__icon" id="generateButton" title="Generate new password">
+                    <button class="lp-pg-generated-password__icon" 
+                            id="generateButton" 
+                            title="Generate new password"
+                            aria-label="Generate new password">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M23 4v6h-6"></path>
                             <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
@@ -26,15 +43,15 @@
                     </button>
                 </div>
             </div>
-            <div class="lp-pg-generated-password__strength-wrapper">
-                <div class="lp-pg-generated-password__strength"></div>
+            <div class="lp-pg-generated-password__strength-wrapper" role="meter" aria-label="Password strength">
+                <div class="lp-pg-generated-password__strength" aria-hidden="true"></div>
             </div>
         </div>
 
-        <form id="PG-FORM" class="lp-pg-settings">
+        <form id="PG-FORM" class="lp-pg-settings" aria-label="Password generation settings">
             <div class="settings-group">
-                <label class="settings-label">
-                    Password Length: <span class="length-display">12</span>
+                <label class="settings-label" for="lp-pg-password-length">
+                    Password Length: <output class="length-display" for="lp-pg-password-length">12</output>
                 </label>
                 <div class="range-wrapper">
                     <input type="range" 
@@ -43,13 +60,16 @@
                            min="1" 
                            max="36" 
                            value="12"
-                           step="1">
+                           step="1"
+                           aria-valuemin="1"
+                           aria-valuemax="36"
+                           aria-valuenow="12">
                 </div>
             </div>
 
-            <div class="settings-group">
-                <h3 class="settings-title">Character Sets</h3>
-                <div class="radio-group">
+            <fieldset class="settings-group">
+                <legend class="settings-title">Character Sets</legend>
+                <div class="radio-group" role="radiogroup" aria-label="Password character set options">
                     <div class="radio-option" data-tooltip="Creates passwords using only letters, avoiding ambiguous characters. Best for memorable passwords.">
                         <input class="radio-input" id="lp-pg-easy-to-say" name="encryption-style" type="radio" value="easy-to-say" />
                         <label class="radio-label" for="lp-pg-easy-to-say">
@@ -75,9 +95,10 @@
                         </label>
                     </div>
                 </div>
-            </div>
+            </fieldset>
 
-            <div class="settings-group" id="character-options">
+            <fieldset class="settings-group" id="character-options">
+                <legend class="visually-hidden">Character Options</legend>
                 <div class="checkbox-grid">
                     <label class="checkbox-wrapper" data-tooltip="Include uppercase letters (A-Z)">
                         <input class="checkbox-input" checked id="lp-pg-uppercase" type="checkbox" name="uppercase" />
@@ -96,13 +117,20 @@
                         <span class="checkbox-label">Symbols</span>
                     </label>
                 </div>
-            </div>
+            </fieldset>
         </form>
 
-        <button class="copy-button">Copy Password</button>
-    </div>
+        <button class="copy-button" 
+                aria-label="Copy password to clipboard"
+                data-clipboard-target="#GENERATED-PASSWORD">
+            Copy Password
+        </button>
+    </main>
 
-    <div class="notification" id="copy-notification">
+    <div class="notification" 
+         id="copy-notification" 
+         role="alert" 
+         aria-live="polite">
         <div class="notification-content">
             <svg class="check-icon" viewBox="0 0 24 24">
                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
@@ -111,6 +139,23 @@
         </div>
     </div>
 
+    <style>
+    /* Accessibility helper class */
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+    </style>
+    
+    <!-- Load modules in correct order -->
+    <script src="js/passwordGenerator.js"></script>
+    <script src="js/uiController.js"></script>
     <script src="popup.js"></script>
 </body>
 </html>

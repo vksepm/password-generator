@@ -1,8 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "LastPass-like Password Generator",
-  "version": "1.0",
-  "description": "A simple password generator similar to LastPass's online tool. Generates secure passwords locally without sending data to any server.",
+  "name": "Password Generator",
+  "version": "1.0.0",
+  "description": "Generate secure passwords with customizable options",
+  "permissions": [
+    "clipboardWrite"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -11,12 +14,15 @@
       "128": "images/icon128.png"
     }
   },
-  "permissions": [
-    "clipboardWrite"
-  ],
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
     "128": "images/icon128.png"
-  }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  },
+  "web_accessible_resources": [],
+  "host_permissions": [],
+  "minimum_chrome_version": "88"
 }
